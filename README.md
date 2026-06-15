@@ -96,8 +96,7 @@ Agent Assembler 已在生产环境验证此方法论，详见 [agent-assembler](
 
 - [x] 阶段 1：方法论文档 + 目录结构
 - [x] 阶段 2：mini_jit 参考实现（Python）
-- [ ] 阶段 3：配方可视化编辑器
-- [ ] 阶段 4：与主流 Agent 框架集成（LangChain / CrewAI / AutoGen）
+- [ ] 阶段 3：与主流 Agent 框架集成示例（LangChain / CrewAI / AutoGen）
 
 ## 贡献
 
