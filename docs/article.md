@@ -152,6 +152,8 @@ def assemble(self, user_input: str) -> AssemblyResult:
 
 **Agent Assembler** 已经部署上线，服务真实用户。它的上下文系统完全基于 JIT 架构：
 
+已发布至 [PyPI](https://pypi.org/project/agent-assembler/)（`pip install agent-assembler`），开源代码同步至 GitHub。
+
 - **20+ 硬化配方**覆盖财务、法律、餐饮、直播等多个行业
 - **配方路由**自动识别用户意图，精准注入领域知识
 - **Token 消耗可控**——每个配方都有 `max_tokens` 上限，杜绝上下文膨胀
@@ -171,6 +173,7 @@ def assemble(self, user_input: str) -> AssemblyResult:
 ```
 context-engineering-kit/
 ├── docs/
+│   ├── article.md               # 本文（技术文章）
 │   ├── two-layer-model.md       # 两层模型设计哲学
 │   └── recipe-protocol.md       # 配方协议 JSON Schema 规范
 ├── reference/
