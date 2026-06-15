@@ -80,7 +80,7 @@ def match_recipe(user_input: str, config: Optional[Config] = None) -> Optional[s
     """Match user input against recipe trigger words.
 
     Scans all recipe files and returns the first recipe whose
-    'triggers' list has any word found in user_input.
+    'trigger_keywords' list has any word found in user_input.
 
     Args:
         user_input: The user's raw input text.
@@ -99,7 +99,7 @@ def match_recipe(user_input: str, config: Optional[Config] = None) -> Optional[s
             recipe = json.loads(recipe_path.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             continue
-        triggers = recipe.get("triggers", [])
+        triggers = recipe.get("trigger_keywords", [])
         if any(trigger.lower() in input_lower for trigger in triggers):
             return recipe_path.stem
     return None

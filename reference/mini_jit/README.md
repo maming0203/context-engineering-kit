@@ -6,15 +6,15 @@
 
 Mini-JIT 是一个 **参考实现**，演示了 Context Engineering 中 "Just-In-Time Context Assembly" 的核心模式：
 
-- **Layer 1（基础设施层）**：每次请求无条件加载 — 核心推理、输出格式化、安全护栏
-- **Layer 2（任务层）**：按需加载 — 根据用户输入匹配配方（recipe），加载对应的 Skill
+- **L0（基础设施层）**：每次请求无条件加载 — 核心推理、输出格式化、安全护栏
+- **L1（任务层）**：按需加载 — 根据用户输入匹配配方（recipe），加载对应的 Skill
 
 这就是 "JIT" 的含义：**不是一次性塞满上下文，而是按需组装**。
 
 ## 代码结构
 
 ```
-mini-jit/
+mini_jit/
 ├── __init__.py       # 导出主要类和函数
 ├── config.py         # 配置：路径、基础设施 Skill 清单
 ├── loader.py         # 加载器：读文件、匹配配方
@@ -35,7 +35,7 @@ mini-jit/
     │
     ▼
 ┌─────────────────────────────┐
-│  Layer 1: 基础设施层 (无条件) │
+│  L0: 基础设施层 (无条件)    │
 │  - core_reasoning           │
 │  - output_formatting        │
 │  - safety_guardrails        │
@@ -50,7 +50,7 @@ mini-jit/
     │
     ▼
 ┌─────────────────────────────┐
-│  Layer 2: 任务层 (按需)      │
+│  L1: 任务层 (按需)          │
 │  - code_review skill        │
 │  - git_diff skill           │
 └─────────────────────────────┘
@@ -64,7 +64,7 @@ mini-jit/
 ### 1. 准备目录结构
 
 ```bash
-cd mini-jit
+cd mini_jit
 mkdir -p recipes skills
 ```
 
@@ -96,7 +96,7 @@ cat > recipes/code_review.json << 'EOF'
 {
   "name": "code_review",
   "description": "Review code for bugs, style, and performance",
-  "triggers": ["review", "code review", "审查代码", "帮我看看这段代码"],
+  "trigger_keywords": ["review", "code review", "审查代码", "帮我看看这段代码"],
   "skills": ["code_review_skill"]
 }
 EOF

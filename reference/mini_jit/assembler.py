@@ -27,8 +27,8 @@ class AssemblyResult:
 class ContextAssembler:
     """Two-layer JIT context assembly engine.
 
-    Layer 1 (Infrastructure): Always loaded — core reasoning, formatting, safety.
-    Layer 2 (Task): Loaded on-demand based on recipe matching.
+    L0 (Infrastructure): Always loaded — core reasoning, formatting, safety.
+    L1 (Task): Loaded on-demand based on recipe matching.
     """
 
     def __init__(self, config: Optional[Config] = None):

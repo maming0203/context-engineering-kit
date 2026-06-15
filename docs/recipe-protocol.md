@@ -16,7 +16,7 @@ status: draft
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Context Recipe",
   "type": "object",
-  "required": ["id", "name", "trigger_keywords", "skills"],
+  "required": ["name", "version", "description", "trigger_keywords", "skills", "constraints", "output_format"],
   "properties": {
     "id": {
       "type": "string",
@@ -42,16 +42,8 @@ status: draft
     },
     "skills": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "required": ["name", "path"],
-        "properties": {
-          "name": { "type": "string" },
-          "path": { "type": "string", "description": "Skill 文件的相对路径" },
-          "priority": { "type": "integer", "default": 0, "description": "优先级，数字越大越优先" }
-        }
-      },
-      "description": "需要注入的 Skill 列表"
+      "items": { "type": "string" },
+      "description": "需要注入的 Skill 名称列表"
     },
     "routing": {
       "type": "object",
@@ -164,24 +156,16 @@ status: draft
 ```json
 {
   "skills": [
-    {
-      "name": "compliance_check",
-      "path": "skills/compliance_check.md",
-      "priority": 10
-    },
-    {
-      "name": "legal_disclaimer",
-      "path": "skills/legal_disclaimer.md",
-      "priority": 5
-    }
+    "compliance_check",
+    "legal_disclaimer"
   ]
 }
 ```
 
 **字段说明**：
-- `name`：Skill 的可读名称（用于日志和调试）
-- `path`：Skill 文件的路径（相对于仓库根目录）
-- `priority`：当多个 Skill 冲突时的优先级（数字越大越优先）
+- skills 是一个**字符串数组**，每个元素是 Skill 的名称
+- 对应的 Skill 文件应位于 `templates/` 或 `examples/<recipe-name>/` 目录下的 `SKILL.md`
+- Skill 的加载顺序即数组定义顺序
 
 ### routing：路由规则
 
@@ -225,19 +209,12 @@ status: draft
 {
   "id": "break-even-analysis",
   "name": "盈亏平衡分析",
+  "version": "1.0.0",
   "description": "帮助用户计算产品或服务的盈亏平衡点",
   "trigger_keywords": ["盈亏平衡", "保本点", "break-even", "盈亏分析"],
   "skills": [
-    {
-      "name": "break_even_formula",
-      "path": "skills/financial/break_even.md",
-      "priority": 10
-    },
-    {
-      "name": "cost_categorization",
-      "path": "skills/financial/cost_types.md",
-      "priority": 5
-    }
+    "break_even_formula",
+    "cost_categorization"
   ],
   "routing": {
     "fallback_recipe": "general_finance",
@@ -245,15 +222,13 @@ status: draft
   },
   "constraints": {
     "max_tokens": 1500,
-    "required_output_format": "markdown",
-    "disclaimers": [
-      "本计算基于简化模型，实际情况可能因税费、市场波动等因素有所不同。"
-    ]
+    "max_steps": 5,
+    "allowed_tools": ["terminal", "read_file"],
+    "forbidden_actions": ["不得假设缺失参数"]
   },
-  "metadata": {
-    "version": "1.0.0",
-    "author": "context-engineering-kit",
-    "tags": ["finance", "analysis"]
+  "output_format": {
+    "type": "structured",
+    "format": "markdown"
   }
 }
 ```
@@ -264,6 +239,7 @@ status: draft
 {
   "id": "compliance-check",
   "name": "合规性检查",
+  "version": "1.0.0",
   "description": "检查业务操作是否符合相关法规要求",
   "trigger_keywords": ["合规", "监管", "法规", "compliance", "regulatory", "法律风险"],
   "trigger_patterns": [
@@ -272,21 +248,9 @@ status: draft
     "法律.*风险"
   ],
   "skills": [
-    {
-      "name": "compliance_checklist",
-      "path": "skills/legal/compliance_checklist.md",
-      "priority": 10
-    },
-    {
-      "name": "industry_regulations",
-      "path": "skills/legal/regulations.md",
-      "priority": 8
-    },
-    {
-      "name": "legal_disclaimer",
-      "path": "skills/legal/disclaimer.md",
-      "priority": 5
-    }
+    "compliance_checklist",
+    "industry_regulations",
+    "legal_disclaimer"
   ],
   "routing": {
     "fallback_recipe": "general_legal",
@@ -294,15 +258,13 @@ status: draft
   },
   "constraints": {
     "max_tokens": 3000,
-    "required_output_format": "markdown",
-    "disclaimers": [
-      "本检查仅供参考，不构成法律建议。具体合规要求请咨询专业律师。"
-    ]
+    "max_steps": 10,
+    "allowed_tools": ["terminal", "read_file", "search_files"],
+    "forbidden_actions": ["不得自行判定法律合规性", "不得忽略违规项"]
   },
-  "metadata": {
-    "version": "1.0.0",
-    "author": "context-engineering-kit",
-    "tags": ["legal", "compliance"]
+  "output_format": {
+    "type": "structured",
+    "format": "markdown"
   }
 }
 ```
@@ -330,6 +292,6 @@ status: draft
 
 ## 下一步
 
-- 查看 `reference/mini-jit/` 了解配方的加载与组装逻辑
+- 查看 `reference/mini_jit/` 了解配方的加载与组装逻辑
 - 查看 `examples/` 下的完整示例
 - 查看 `templates/` 获取可复用的配方模板

@@ -5,3 +5,10 @@ __pycache__/
 dist/
 build/
 .env
+.venv/
+venv/
+.idea/
+.vscode/
+*.swp
+*.swo
+node_modules/

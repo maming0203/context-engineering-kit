@@ -1,0 +1,15 @@
+{
+  "name": "code_review",
+  "version": "1.0.0",
+  "description": "Review code for bugs, style, and performance",
+  "trigger_keywords": ["review", "code review", "审查代码", "帮我看看这段代码"],
+  "skills": ["code_review_skill"],
+  "constraints": {
+    "max_tokens": 2048,
+    "max_steps": 5
+  },
+  "output_format": {
+    "type": "structured",
+    "format": "markdown"
+  }
+}
