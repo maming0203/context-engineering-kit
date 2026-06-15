@@ -2,10 +2,13 @@
 title: Context Engineering Kit
 date: 2026-06-15
 tags: [context-engineering, jit, ai-agents, prompt-engineering]
-status: draft
+status: published
 ---
 
 # Context Engineering Kit
+
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
 
 > **JIT Context Assembly 方法论与参考实现**
 
@@ -45,6 +48,10 @@ cat docs/recipe-protocol.md
 
 # 运行示例
 python3 scripts/validate.py examples/
+
+# 运行 mini-jit 演示
+cd reference/mini_jit
+python3 demo.py
 ```
 
 ## 仓库结构
@@ -65,6 +72,12 @@ context-engineering-kit/
 └── scripts/                     # 工具脚本
 ```
 
+## 📖 核心文章
+
+**[《当全网还在聊 Prompt Engineering，我们已经把 JIT Context Assembly 部署上线了》](docs/article.md)**
+
+从实战角度解读 Context Engineering 与 Prompt Engineering 的本质区别，以及两层模型的由来。
+
 ## 与 Agent Assembler 的关系
 
 本项目脱胎于 **Agent Assembler** 的实战经验。在 Agent Assembler 中，我们发现当 Skill 数量超过 15 个时，全量注入会导致：
@@ -76,6 +89,8 @@ context-engineering-kit/
 Context Engineering Kit 是对这些教训的系统化总结——提供方法论、协议规范和参考实现，让任何人都能快速构建自己的 JIT 上下文系统。
 
 Agent Assembler 是**消费者**，Context Engineering Kit 是**方法论与工具箱**。
+
+Agent Assembler 已在生产环境验证此方法论，详见 [agent-assembler](https://github.com/maming0203/agent-assembler)。
 
 ## 路线图
 
