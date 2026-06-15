@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "_comment": "Context Engineering Kit — Recipe Template",
+  "_instructions": "Copy this template and fill in the fields to create a new recipe. All fields marked required must be present.",
+  "name": "example-recipe",
+  "version": "1.0.0",
+  "description": "A brief description of what this recipe does and when it should be used.",
+  "trigger_keywords": [
+    "keyword1",
+    "keyword2",
+    "keyword3"
+  ],
+  "skills": [
+    "skill-name-1",
+    "skill-name-2"
+  ],
+  "routing": {
+    "_comment": "Optional: define routing targets for sub-tasks or escalation.",
+    "targets": [
+      {
+        "condition": "when the task involves X",
+        "target": "another-recipe-or-agent"
+      }
+    ]
+  },
+  "constraints": {
+    "_comment": "Define constraints that the recipe must operate within.",
+    "max_tokens": 4096,
+    "max_steps": 10,
+    "allowed_tools": [
+      "terminal",
+      "read_file",
+      "write_file"
+    ],
+    "forbidden_actions": [
+      "modifying production systems without approval"
+    ],
+    "time_limit_seconds": 300
+  },
+  "output_format": {
+    "_comment": "Define the expected output structure.",
+    "type": "structured",
+    "schema": {
+      "summary": "string — a brief summary of the result",
+      "details": "array — detailed findings or steps taken",
+      "confidence": "number — confidence score from 0.0 to 1.0",
+      "next_steps": "array — suggested follow-up actions"
+    },
+    "format": "markdown",
+    "language": "zh-CN"
+  }
+}

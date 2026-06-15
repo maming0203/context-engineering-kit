@@ -1,0 +1,72 @@
+{
+  "name": "compliance-check",
+  "version": "1.0.0",
+  "description": "合规检查配方。根据指定的合规框架和规则集，对目标文档、代码或流程进行系统性审查，输出合规状态报告和整改建议。",
+  "trigger_keywords": [
+    "合规",
+    "检查",
+    "审查",
+    "compliance",
+    "合规检查",
+    "合规审查",
+    "审计"
+  ],
+  "skills": [
+    "compliance-rule-matcher",
+    "document-parser",
+    "report-generator"
+  ],
+  "routing": {
+    "targets": [
+      {
+        "condition": "当发现严重违规项时",
+        "target": "escalation-handler"
+      },
+      {
+        "condition": "当需要法律意见时",
+        "target": "legal-review-recipe"
+      }
+    ]
+  },
+  "constraints": {
+    "max_tokens": 4096,
+    "max_steps": 12,
+    "allowed_tools": [
+      "terminal",
+      "read_file",
+      "search_files"
+    ],
+    "forbidden_actions": [
+      "不得自行判定法律合规性（仅提供检查清单匹配结果）",
+      "不得忽略任何已识别的违规项",
+      "不得修改被审查的原始文档"
+    ],
+    "time_limit_seconds": 300
+  },
+  "output_format": {
+    "type": "structured",
+    "schema": {
+      "summary": "string — 合规检查总体结论",
+      "overall_status": "enum — compliant / partial / non-compliant",
+      "findings": [
+        {
+          "rule_id": "string — 规则编号",
+          "description": "string — 规则描述",
+          "status": "enum — pass / fail / warning / not-applicable",
+          "evidence": "string — 判定依据",
+          "recommendation": "string — 整改建议（仅 fail/warning 时）"
+        }
+      ],
+      "statistics": {
+        "total_rules": "number",
+        "passed": "number",
+        "failed": "number",
+        "warnings": "number",
+        "not_applicable": "number"
+      },
+      "next_steps": "array — 建议的后续行动"
+    },
+    "format": "markdown",
+    "language": "zh-CN"
+  }
+}

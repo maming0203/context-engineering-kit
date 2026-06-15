@@ -1,0 +1,58 @@
+{
+  "name": "break-even-analysis",
+  "version": "1.0.0",
+  "description": "保本点（盈亏平衡）分析配方。根据固定成本、变动成本和售价，计算保本销量和保本销售额，并生成可视化分析报告。",
+  "trigger_keywords": [
+    "保本点",
+    "盈亏平衡",
+    "break-even",
+    "保本分析",
+    "盈亏平衡点",
+    "保本销量"
+  ],
+  "skills": [
+    "break-even-calculator",
+    "financial-data-parser",
+    "report-formatter"
+  ],
+  "routing": {
+    "targets": [
+      {
+        "condition": "当用户需要更详细的财务建模时",
+        "target": "financial-modeling-recipe"
+      },
+      {
+        "condition": "当涉及多产品保本分析时",
+        "target": "multi-product-break-even"
+      }
+    ]
+  },
+  "constraints": {
+    "max_tokens": 4096,
+    "max_steps": 8,
+    "allowed_tools": [
+      "terminal",
+      "read_file",
+      "write_file"
+    ],
+    "forbidden_actions": [
+      "不得在没有用户确认的情况下修改原始数据",
+      "不得忽略缺失的关键参数（固定成本、变动成本、售价）"
+    ],
+    "time_limit_seconds": 120
+  },
+  "output_format": {
+    "type": "structured",
+    "schema": {
+      "summary": "string — 保本点分析结论摘要",
+      "break_even_units": "number — 保本销量（件数）",
+      "break_even_revenue": "number — 保本销售额（元）",
+      "margin_of_safety": "number — 安全边际率（百分比）",
+      "assumptions": "array — 计算所依据的假设",
+      "sensitivity": "object — 关键变量敏感度分析",
+      "chart_data": "object — 用于生成图表的数据点"
+    },
+    "format": "markdown",
+    "language": "zh-CN"
+  }
+}

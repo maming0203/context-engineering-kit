@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "description": "基础设施层 Skill 清单",
+  "_instructions": "List skills that are considered infrastructure-level — i.e., they are used by many other recipes and should always be available.",
+  "skills": [
+    {
+      "name": "data-parser",
+      "reason": "为什么是基础设施级：几乎所有配方都需要解析用户输入的数据格式"
+    },
+    {
+      "name": "output-formatter",
+      "reason": "为什么是基础设施级：统一输出格式，确保所有配方的输出一致性"
+    },
+    {
+      "name": "validator",
+      "reason": "为什么是基础设施级：提供通用的输入/输出校验能力，被多个配方复用"
+    },
+    {
+      "name": "error-handler",
+      "reason": "为什么是基础设施级：统一的错误处理和降级策略，提升系统鲁棒性"
+    }
+  ]
+}
